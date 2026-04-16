@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haja Luz — Gênesis, Hebreus e Apocalipse em Diálogo com a CMB</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #04060e;
+    --deep: #080d1a;
+    --cosmos: #0c1428;
+    --nebula: #132042;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim: #7a6130;
+    --silver: #a8b8d4;
+    --white: #f0eeea;
+    --cream: #e8e0d0;
+    --text: #d0c8b8;
+    --glow: rgba(201,168,76,0.18);
+    --glow-strong: rgba(201,168,76,0.35);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--void);
+    color: var(--text);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    line-height: 1.8;
+    overflow-x: hidden;
+  }
+
+  /* ── STARFIELD ── */
+  #starfield {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  #starfield canvas { width: 100%; height: 100%; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(to bottom, rgba(4,6,14,0.95), transparent);
+    backdrop-filter: blur(4px);
+  }
+  nav a {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--silver);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  nav a:hover { color: var(--gold-light); }
+
+  /* ── SECTIONS ── */
+  section { position: relative; z-index: 1; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.3s forwards;
+  }
+
+  h1.hero-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s 0.6s forwards;
+    text-shadow: 0 0 60px rgba(201,168,76,0.3);
+  }
+
+  h1.hero-title span {
+    color: var(--gold-light);
+    display: block;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.55em;
+    letter-spacing: 0.08em;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--silver);
+    max-width: 600px;
+    font-style: italic;
+    opacity: 0;
+    animation: fadeUp 1s 0.9s forwards;
+    margin-bottom: 3rem;
+  }
+
+  .scroll-cue {
+    opacity: 0;
+    animation: fadeUp 1s 1.5s forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--gold-dim);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* ── CONTENT WRAPPER ── */
+  .content-wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* ── SECTION HEADERS ── */
+  .sec-header {
+    text-align: center;
+    padding: 5rem 2rem 3rem;
+  }
+  .sec-tag {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .sec-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.6rem, 4vw, 2.6rem);
+    color: var(--white);
+    font-weight: 400;
+  }
+  .sec-rule {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 1.5rem auto 0;
+    opacity: 0.6;
+  }
+
+  /* ── VERSE CARDS ── */
+  #passagens { padding-bottom: 4rem; }
+
+  .verse-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .vtab {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.5rem 1.5rem;
+    border: 1px solid var(--gold-dim);
+    background: transparent;
+    color: var(--silver);
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 2px;
+  }
+  .vtab:hover { border-color: var(--gold); color: var(--gold-light); }
+  .vtab.active {
+    background: var(--gold);
+    color: var(--void);
+    border-color: var(--gold);
+    font-weight: 600;
+  }
+
+  .verse-panel {
+    display: none;
+    animation: fadeIn 0.5s forwards;
+  }
+  .verse-panel.active { display: block; }
+
+  .verse-card {
+    background: linear-gradient(135deg, rgba(19,32,66,0.7), rgba(8,13,26,0.9));
+    border: 1px solid rgba(201,168,76,0.2);
+    border-left: 3px solid var(--gold);
+    padding: 2.5rem;
+    border-radius: 4px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5), inset 0 0 60px rgba(201,168,76,0.03);
+  }
+
+  .verse-ref {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  blockquote.verse-text {
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    border: none;
+    padding: 0;
+    quotes: "\201C""\201D";
+  }
+  blockquote.verse-text::before {
+    content: "\201C";
+    font-size: 4rem;
+    color: var(--gold-dim);
+    line-height: 0;
+    vertical-align: -1rem;
+    margin-right: 0.2rem;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .verse-analysis {
+    color: var(--text);
+    font-size: 1rem;
+    line-height: 1.9;
+    border-top: 1px solid rgba(201,168,76,0.15);
+    padding-top: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  /* ── CMB SECTION ── */
+  #cmb {
+    padding: 2rem 0 5rem;
+  }
+
+  .cmb-visual {
+    position: relative;
+    margin: 3rem auto;
+    max-width: 700px;
+    padding: 0 2rem;
+  }
+
+  .cmb-orb {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    margin: 0 auto 2rem;
+    position: relative;
+    background: radial-gradient(circle at 40% 35%,
+      #e8c97a 0%,
+      #c9673a 12%,
+      #8b2a6b 26%,
+      #3a1f8b 42%,
+      #0d1a4d 60%,
+      #020818 80%
+    );
+    box-shadow:
+      0 0 80px rgba(201,168,76,0.25),
+      0 0 140px rgba(100,60,180,0.15),
+      inset 0 0 60px rgba(0,0,0,0.4);
+    animation: orbPulse 6s ease-in-out infinite;
+    cursor: pointer;
+  }
+
+  .cmb-orb::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.3);
+    animation: orbRing 6s ease-in-out infinite reverse;
+  }
+
+  .cmb-orb::after {
+    content: 'CMB';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    color: rgba(240,238,234,0.6);
+  }
+
+  .cmb-fact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .cmb-fact {
+    background: rgba(19,32,66,0.5);
+    border: 1px solid rgba(201,168,76,0.15);
+    padding: 1.5rem;
+    border-radius: 4px;
+    text-align: center;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .cmb-fact:hover {
+    border-color: var(--gold);
+    transform: translateY(-3px);
+  }
+
+  .cmb-fact .val {
+    font-family: 'Cinzel', serif;
+    font-size: 1.6rem;
+    color: var(--gold-light);
+    display: block;
+  }
+  .cmb-fact .lbl {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--silver);
+    margin-top: 0.3rem;
+    display: block;
+  }
+
+  .cmb-desc {
+    font-size: 1rem;
+    color: var(--text);
+    line-height: 1.9;
+  }
+
+  /* ── TIMELINE ── */
+  #cronologia { padding: 2rem 0 5rem; }
+
+  .timeline {
+    position: relative;
+    padding: 2rem 0;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--gold-dim), transparent);
+    transform: translateX(-50%);
+  }
+
+  .tl-item {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    align-items: flex-start;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+  .tl-item.visible { opacity: 1; transform: none; }
+  .tl-item:nth-child(even) { flex-direction: row-reverse; }
+
+  .tl-side {
+    flex: 1;
+    text-align: right;
+  }
+  .tl-item:nth-child(even) .tl-side { text-align: left; }
+
+  .tl-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+    margin-top: 0.4rem;
+    box-shadow: 0 0 12px var(--gold);
+    position: relative;
+    z-index: 1;
+  }
+
+  .tl-content {
+    flex: 1;
+  }
+
+  .tl-year {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .tl-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+  .tl-text {
+    font-size: 0.9rem;
+    color: var(--silver);
+    line-height: 1.7;
+  }
+
+  /* ── APOLOGIA ── */
+  #apologia { padding: 2rem 0 5rem; }
+
+  .arg-steps {
+    counter-reset: step;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .arg-step {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    background: rgba(12,20,40,0.6);
+    border: 1px solid rgba(201,168,76,0.12);
+    padding: 1.8rem;
+    border-radius: 4px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    cursor: default;
+  }
+  .arg-step:hover {
+    border-color: rgba(201,168,76,0.4);
+    box-shadow: 0 0 30px rgba(201,168,76,0.08);
+  }
+
+  .arg-num {
+    counter-increment: step;
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: var(--gold-dim);
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 2rem;
+  }
+
+  .arg-body {}
+  .arg-label {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+  .arg-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.05rem;
+    color: var(--white);
+    margin-bottom: 0.6rem;
+  }
+  .arg-text { font-size: 0.95rem; color: var(--text); line-height: 1.8; }
+
+  /* ── DIALOGUE BRIDGE ── */
+  #dialogo { padding: 2rem 0 5rem; }
+
+  .bridge-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: center;
+    margin: 3rem 0;
+  }
+
+  .bridge-col {
+    padding: 2rem;
+    border-radius: 4px;
+    text-align: center;
+  }
+  .bridge-col.teologia {
+    background: linear-gradient(135deg, rgba(40,20,10,0.6), rgba(20,10,5,0.8));
+    border: 1px solid rgba(201,168,76,0.25);
+  }
+  .bridge-col.ciencia {
+    background: linear-gradient(135deg, rgba(10,20,50,0.6), rgba(5,10,30,0.8));
+    border: 1px solid rgba(100,160,255,0.2);
+  }
+
+  .bridge-icon { font-size: 2.5rem; margin-bottom: 0.8rem; display: block; }
+  .bridge-col-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+  .bridge-items { list-style: none; }
+  .bridge-items li {
+    font-size: 0.9rem;
+    color: var(--silver);
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    line-height: 1.5;
+  }
+  .bridge-items li:last-child { border-bottom: none; }
+
+  .bridge-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .bridge-arrows {
+    font-size: 1.4rem;
+    color: var(--gold);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+  }
+  .bridge-label {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+  }
+
+  /* ── BIBLIOGRAPHY ── */
+  #referencias { padding: 2rem 0 6rem; }
+
+  .ref-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .ref-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1.2rem 1.5rem;
+    background: rgba(8,13,26,0.7);
+    border-left: 2px solid var(--gold-dim);
+    border-radius: 2px;
+    transition: border-color 0.3s;
+  }
+  .ref-item:hover { border-left-color: var(--gold); }
+
+  .ref-cat {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+  }
+  .ref-cat.cosm { background: rgba(40,80,200,0.3); color: #8ab4ff; }
+  .ref-cat.teol { background: rgba(180,130,40,0.3); color: var(--gold-light); }
+  .ref-cat.apol { background: rgba(80,160,80,0.3); color: #8bd4a0; }
+
+  .ref-cite {
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .ref-cite strong { color: var(--cream); }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid rgba(201,168,76,0.1);
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    color: var(--gold-dim);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── DIVIDERS ── */
+  .astro-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 3rem 2rem 0;
+    opacity: 0.5;
+  }
+  .astro-divider::before,
+  .astro-divider::after {
+    content: '';
+    flex: 1;
+    max-width: 200px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-dim));
+  }
+  .astro-divider::after { background: linear-gradient(to left, transparent, var(--gold-dim)); }
+  .astro-divider span { color: var(--gold); font-size: 1.2rem; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes orbPulse {
+    0%, 100% { box-shadow: 0 0 80px rgba(201,168,76,0.25), 0 0 140px rgba(100,60,180,0.15); }
+    50%       { box-shadow: 0 0 120px rgba(201,168,76,0.4), 0 0 200px rgba(100,60,180,0.25); }
+  }
+  @keyframes orbRing {
+    0% { transform: scale(1) rotate(0deg); opacity: 0.3; }
+    50% { transform: scale(1.05) rotate(180deg); opacity: 0.6; }
+    100% { transform: scale(1) rotate(360deg); opacity: 0.3; }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50%       { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 680px) {
+    .bridge-grid { grid-template-columns: 1fr; }
+    .bridge-center { display: none; }
+    .timeline::before { left: 20px; }
+    .tl-item, .tl-item:nth-child(even) { flex-direction: column; padding-left: 2.5rem; }
+    .tl-side, .tl-item:nth-child(even) .tl-side { text-align: left; }
+    .tl-dot { position: absolute; left: 14px; }
+    .tl-item { position: relative; }
+  }
+</style>
+</head>
+<body>
+
+<!-- STARFIELD -->
+<div id="starfield"><canvas id="stars"></canvas></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#passagens">Passagens</a>
+  <a href="#cmb">CMB</a>
+  <a href="#cronologia">Cronologia</a>
+  <a href="#apologia">Argumento</a>
+  <a href="#dialogo">Diálogo</a>
+  <a href="#referencias">Referências</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <p class="hero-eyebrow">Apologética · Cosmologia · Teologia</p>
+  <h1 class="hero-title">
+    Haja Luz
+    <span>Gênesis, Hebreus e Apocalipse em Diálogo com a Radiação Cósmica de Fundo</span>
+  </h1>
+  <p class="hero-subtitle">
+    Uma análise apologética da convergência entre o testemunho bíblico da criação e a evidência cosmológica do começo do universo.
+  </p>
+  <div class="scroll-cue">
+    <div class="scroll-line"></div>
+    <span>Explorar</span>
+  </div>
+</section>
+
+<!-- PASSAGENS BÍBLICAS -->
+<div class="astro-divider"><span>✦</span></div>
+<section id="passagens">
+  <div class="sec-header">
+    <span class="sec-tag">I — Escrituras</span>
+    <h2 class="sec-title">As Três Passagens Fundamentais</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="content-wrap">
+    <div class="verse-tabs">
+      <button class="vtab active" onclick="showVerse('gen')">Gênesis 1:3</button>
+      <button class="vtab" onclick="showVerse('heb')">Hebreus 11:3</button>
+      <button class="vtab" onclick="showVerse('apo')">Apocalipse 21:23</button>
+    </div>
+
+    <div id="v-gen" class="verse-panel active">
+      <div class="verse-card">
+        <span class="verse-ref">Gênesis 1:3 — A Primeira Palavra Criadora</span>
+        <blockquote class="verse-text">Disse Deus: 'Haja luz'; e houve luz.</blockquote>
+        <div class="verse-analysis">
+          <p>Gênesis apresenta a origem do cosmos como fruto da <em>palavra criadora</em> de Deus. A primeira ação divina é trazer luz à existência por meio de uma ordem verbal. Teologicamente, isso enfatiza que o mundo visível deriva de uma <strong>causa pessoal e intencional</strong> — a iniciativa soberana de Deus —, não de necessidade impessoal ou de uma matéria eterna sem origem.</p>
+          <br>
+          <p>O verbo hebraico <em>bārāʾ</em> (criar) implica uma ação sem dependência de material pré-existente, apontando para a doutrina da <em>criação ex nihilo</em>: o ser do cosmos tem origem em Deus e somente em Deus.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="v-heb" class="verse-panel">
+      <div class="verse-card">
+        <span class="verse-ref">Hebreus 11:3 — O Visível vem do Invisível</span>
+        <blockquote class="verse-text">Pela fé entendemos que o universo foi formado pela palavra de Deus, de modo que aquilo que se vê não provém do visível.</blockquote>
+        <div class="verse-analysis">
+          <p>Hebreus 11:3 oferece uma formulação teológica que complementa Gênesis: o mundo sensível tem origem em uma causa que não é ela mesma sensível. O texto não pretende descrever mecanismos físicos, mas afirmar uma conclusão <strong>metafísica</strong> — que há uma causa transcendente e criadora responsável pela existência do visível.</p>
+          <br>
+          <p>Esta afirmação ressoa com o problema filosófico do <em>por que há algo em vez de nada</em>: a explicação última do cosmos não pode ser encontrada <em>dentro</em> do cosmos, mas deve ser buscada numa realidade que o transcende.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="v-apo" class="verse-panel">
+      <div class="verse-card">
+        <span class="verse-ref">Apocalipse 21:23 — A Luz na Consumação</span>
+        <blockquote class="verse-text">A cidade não precisa nem do sol nem da lua para lhe darem luz; porque a glória de Deus a ilumina.</blockquote>
+        <div class="verse-analysis">
+          <p>Apocalipse aponta para a consumação em que Deus é a fonte última de luz e presença. Liturgicamente e escatologicamente, a imagem liga criação e consumação: desde a primeira palavra (<em>"Haja luz"</em>) até a última visão, Deus é a origem e o destino da luz e da ordem criada.</p>
+          <br>
+          <p>Esta inclusão narrativa — da luz primordial à luz escatológica — oferece uma <strong>coerência teológica profunda</strong>: o mesmo Deus que falou luz ao cosmos no início será a luz que preencherá o cosmos renovado no fim.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CMB -->
+<div class="astro-divider"><span>✦</span></div>
+<section id="cmb">
+  <div class="sec-header">
+    <span class="sec-tag">II — Cosmologia</span>
+    <h2 class="sec-title">A Radiação Cósmica de Fundo</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="content-wrap">
+    <div class="cmb-visual">
+      <div class="cmb-orb" title="Representação artística da CMB — o 'fóssil luminoso' do Big Bang"></div>
+      <p style="text-align:center; font-family:'Raleway',sans-serif; font-size:0.65rem; color:var(--gold-dim); letter-spacing:0.1em; margin-top:-0.5rem;">Representação artística da CMB · mapa de temperatura do universo primitivo</p>
+    </div>
+
+    <div class="cmb-fact-grid">
+      <div class="cmb-fact">
+        <span class="val">13,8 Ga</span>
+        <span class="lbl">Idade do universo</span>
+      </div>
+      <div class="cmb-fact">
+        <span class="val">380 mil</span>
+        <span class="lbl">Anos após o Big Bang — origem da CMB</span>
+      </div>
+      <div class="cmb-fact">
+        <span class="val">2,725 K</span>
+        <span class="lbl">Temperatura atual da CMB</span>
+      </div>
+      <div class="cmb-fact">
+        <span class="val">1964</span>
+        <span class="lbl">Descoberta por Penzias e Wilson</span>
+      </div>
+    </div>
+
+    <div class="cmb-desc">
+      <p>A <strong>radiação cósmica de fundo em micro-ondas</strong> (CMB, do inglês <em>Cosmic Microwave Background</em>) é uma forma de radiação eletromagnética que preenche todo o universo. <span title="Fonte: Wikipedia PT — Radiação cósmica de fundo">Sua existência foi prevista teoricamente por George Gamow, Ralph Alpher e Robert Herman em 1948</span>, e detectada experimentalmente em 1965 por Arno Penzias e Robert Wilson, da Bell Labs.</p>
+      <br>
+      <p>Ela representa o <em>fóssil térmico</em> do universo primitivo: quando o cosmos tinha cerca de 380.000 anos, a temperatura caiu o suficiente para que elétrons e prótons se unissem em átomos neutros — evento chamado de <em>recombinação</em> —, liberando a luz que havia ficado presa no plasma primordial. Essa luz viajou pelos últimos 13,8 bilhões de anos e ainda nos alcança hoje na faixa das micro-ondas.</p>
+      <br>
+      <p>A CMB é, ao lado do afastamento das galáxias e da abundância de elementos leves, <strong>uma das mais sólidas evidências observacionais de que o universo teve um começo físico definido</strong>. Missões como COBE (1989), WMAP (2001) e Planck (2009) mapearam suas anisotropias com precisão crescente, inaugurando a era da cosmologia de precisão.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CRONOLOGIA -->
+<div class="astro-divider"><span>✦</span></div>
+<section id="cronologia">
+  <div class="sec-header">
+    <span class="sec-tag">III — História</span>
+    <h2 class="sec-title">Cronologia da Descoberta</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="content-wrap">
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-side"></div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <span class="tl-year">Séc. I d.C.</span>
+          <div class="tl-title">Hebreus 11:3 — Epístola</div>
+          <p class="tl-text">O texto afirma que o visível provém do invisível pela palavra de Deus — formulação metafísica da criação transcendente.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-content">
+          <span class="tl-year">1915</span>
+          <div class="tl-title">Relatividade Geral — Einstein</div>
+          <p class="tl-text">As equações de campo de Einstein possibilitam soluções para um universo em expansão, apontando para um estado inicial.</p>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-side"></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-side"></div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <span class="tl-year">1927–1929</span>
+          <div class="tl-title">Lemaître e Hubble — Expansão cósmica</div>
+          <p class="tl-text">Georges Lemaître propõe um "átomo primordial"; Hubble confirma empiricamente que as galáxias se afastam — o universo se expande.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-content">
+          <span class="tl-year">1948</span>
+          <div class="tl-title">Previsão Teórica da CMB — Gamow, Alpher, Herman</div>
+          <p class="tl-text">Preveem matematicamente que um universo quente primordial deixaria um resíduo de radiação detectável, estimando temperatura de ~5 K.</p>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-side"></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-side"></div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <span class="tl-year">1964–1965</span>
+          <div class="tl-title">Descoberta Acidental — Penzias e Wilson</div>
+          <p class="tl-text">Engenheiros da Bell Labs detectam um "ruído" inexplicável em sua antena de micro-ondas. Reconhecido como a CMB prevista, rendeu-lhes o Nobel de Física em 1978.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-content">
+          <span class="tl-year">1989–1996</span>
+          <div class="tl-title">COBE — Primeiro mapa da CMB</div>
+          <p class="tl-text">O satélite COBE da NASA produz o primeiro mapa das anisotropias da CMB, inaugurando a cosmologia de precisão. Nobel de Física em 2006.</p>
+        </div>
+        <div class="tl-dot"></div>
+        <div class="tl-side"></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-side"></div>
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <span class="tl-year">2001–2013</span>
+          <div class="tl-title">WMAP e Planck — Alta precisão</div>
+          <p class="tl-text">As missões WMAP (NASA) e Planck (ESA) refinam os parâmetros cosmológicos com precisão sem precedentes, confirmando um universo com 13,8 bilhões de anos e origem singular.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARGUMENTO APOLOGÉTICO -->
+<div class="astro-divider"><span>✦</span></div>
+<section id="apologia">
+  <div class="sec-header">
+    <span class="sec-tag">IV — Apologética</span>
+    <h2 class="sec-title">Estrutura do Argumento</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="content-wrap">
+    <div class="arg-steps">
+      <div class="arg-step">
+        <div class="arg-num">1</div>
+        <div class="arg-body">
+          <span class="arg-label">Premissa Empírica</span>
+          <div class="arg-title">Evidência de um Início Físico</div>
+          <p class="arg-text">A cosmologia moderna identifica múltiplas evidências convergentes de que o universo teve um começo: a expansão cósmica (Hubble 1929), a nucleossíntese primordial e a radiação cósmica de fundo (CMB). O universo não é eterno — ele <em>começou a existir</em>.</p>
+        </div>
+      </div>
+      <div class="arg-step">
+        <div class="arg-num">2</div>
+        <div class="arg-body">
+          <span class="arg-label">Premissa Metafísica</span>
+          <div class="arg-title">Tudo que Começa a Existir tem uma Causa</div>
+          <p class="arg-text">O princípio causal — <em>ex nihilo, nihil fit</em> (do nada, nada surge) — é um dos mais robustos da razão. Se o universo teve um começo, tem uma causa. E tal causa deve ser exterior ao espaço, ao tempo e à matéria — ou seja, transcendente.</p>
+        </div>
+      </div>
+      <div class="arg-step">
+        <div class="arg-num">3</div>
+        <div class="arg-body">
+          <span class="arg-label">Testemunho Bíblico</span>
+          <div class="arg-title">O Visível Vem do Invisível</div>
+          <p class="arg-text">Gênesis 1:3 e Hebreus 11:3 afirmam que o mundo visível deriva da palavra criadora de Deus — uma causa pessoal, transcendente e intencional. Apocalipse 21:23 revela que essa mesma causa será a luz final, completando a narrativa da criação à consumação.</p>
+        </div>
+      </div>
+      <div class="arg-step">
+        <div class="arg-num">4</div>
+        <div class="arg-body">
+          <span class="arg-label">Conclusão Racional</span>
+          <div class="arg-title">Hipótese Teísta como Explicação Plausível</div>
+          <p class="arg-text">A convergência entre a afirmação bíblica de criação por palavra e a evidência científica de um começo cosmológico torna intelectualmente séria a hipótese de uma causa transcendente e pessoal como explicação última — um Deus criador. Como observou John Lennox: <em>"o Big Bang se encaixa exatamente com a narrativa cristã da criação."</em></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIÁLOGO FÉ E CIÊNCIA -->
+<div class="astro-divider"><span>✦</span></div>
+<section id="dialogo">
+  <div class="sec-header">
+    <span class="sec-tag">V — Metodologia</span>
+    <h2 class="sec-title">Fé e Ciência em Diálogo</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="content-wrap">
+    <div class="bridge-grid">
+      <div class="bridge-col teologia">
+        <span class="bridge-icon">✝</span>
+        <div class="bridge-col-title">Teologia</div>
+        <ul class="bridge-items">
+          <li>Por que existe algo em vez de nada?</li>
+          <li>Quem é a causa última?</li>
+          <li>Qual o significado da existência?</li>
+          <li>Qual o destino do cosmos?</li>
+          <li>Deus como Criador pessoal</li>
+        </ul>
+      </div>
+      <div class="bridge-center">
+        <div class="bridge-arrows">
+          <span>↔</span>
+        </div>
+        <span class="bridge-label">Compatíveis · Complementares</span>
+      </div>
+      <div class="bridge-col ciencia">
+        <span class="bridge-icon">🔭</span>
+        <div class="bridge-col-title">Cosmologia</div>
+        <ul class="bridge-items">
+          <li>Como o universo evoluiu?</li>
+          <li>Quais os mecanismos físicos?</li>
+          <li>Qual a estrutura do cosmos?</li>
+          <li>Quais os parâmetros cosmológicos?</li>
+          <li>CMB como evidência empírica</li>
+        </ul>
+      </div>
+    </div>
+    <p style="font-size:1rem; color:var(--text); line-height:1.9; margin-top:1rem;">
+      A ciência responde ao <strong>"como"</strong> — descreve mecanismos, processos, estruturas e a evolução térmica do universo. A teologia responde ao <strong>"por quê"</strong> — indaga sobre a causa última e o sentido da existência. Afirmar que Deus criou a luz não é uma afirmação de física sobre fótons; é uma afirmação metafísica compatível com — mas não redutível a — constatações científicas.
+    </p>
+    <br>
+    <p style="font-size:1rem; color:var(--text); line-height:1.9;">
+      Essa distinção foi articulada por figuras como o matemático <strong>John Lennox</strong> (Oxford) e o filósofo <strong>William Lane Craig</strong>, que desenvolveram o Argumento Cosmológico Kalam precisamente a partir da evidência científica de um começo do universo para sustentar filosoficamente a hipótese teísta — sem confundir os domínios nem forçar concordâncias indevidas.
+    </p>
+  </div>
+</section>
+
+<!-- REFERÊNCIAS -->
+<div class="astro-divider"><span>✦</span></div>
+<section id="referencias">
+  <div class="sec-header">
+    <span class="sec-tag">VI — Bibliografia</span>
+    <h2 class="sec-title">Referências Bibliográficas</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="content-wrap">
+    <div class="ref-list">
+
+      <div class="ref-item">
+        <span class="ref-cat cosm">Cosmologia</span>
+        <div class="ref-cite">
+          <strong>Penzias, A. A.; Wilson, R. W.</strong> "A Measurement of Excess Antenna Temperature at 4080 Mc/s." <em>Astrophysical Journal</em>, v. 142, p. 419–421, 1965.
+        </div>
+      </div>
+
+      <div class="ref-item">
+        <span class="ref-cat cosm">Cosmologia</span>
+        <div class="ref-cite">
+          <strong>Dicke, R. H. et al.</strong> "Cosmic Black-Body Radiation." <em>Astrophysical Journal</em>, v. 142, p. 414–419, 1965.
+        </div>
+      </div>
+
+      <div class="ref-item">
+        <span class="ref-cat cosm">Cosmologia</span>
+        <div class="ref-cite">
+          <strong>Fixsen, D. J.</strong> "The Temperature of the Cosmic Microwave Background." <em>The Astrophysical Journal</em>, v. 707, n. 2, p. 916–920, 2009.
+        </div>
+      </div>
+
+      <div class="ref-item">
+        <span class="ref-cat cosm">Cosmologia</span>
+        <div class="ref-cite">
+          <strong>Spergel, D. N. et al.</strong> "First-year Wilkinson Microwave Anisotropy Probe (WMAP) observations: determination of cosmological parameters." <em>Astrophysical Journal Supplement</em>, v. 148, p. 175–194, 2003.
+        </div>
+      </div>
+
+      <div class="ref-item">
+        <span class="ref-cat cosm">Cosmologia</span>
+        <div class="ref-cite">
+          <strong>Guimarães, L. F.</strong> "A física da radiação cósmica de fundo em micro-ondas." <em>Cadernos de Astronomia</em>, v. 4, n. 2, p. 62–88, 2023.
+        </div>
+      </div>
+
+      <div class="ref-item">
+        <span class="ref-cat apol">Apologética</span>
+        <div class="ref-cite">
+          <strong>Craig, W. L.; Copan, P.</strong> <em>Creation Out of Nothing.</em> Grand Rapids: Baker Academic, 2004.
+        </div>
+      </div>
+
+      <div class="ref-item">
+        <span class="ref-cat apol">Apologética</span>
+        <div class="ref-cite">
+          <strong>Lennox, J. C.</strong> <em>Seven Days That Divide the World: The Beginning According to Genesis and Science.</em> Grand Rapids: Zondervan, 2011.
+        </div>
+      </div>
+
+      <div class="ref-item">
+        <span class="ref-cat apol">Apologética</span>
+        <div class="ref-cite">
+          <strong>Craig, W. L.</strong> <em>The Kalam Cosmological Argument.</em> New York: Barnes & Noble, 1979.
+        </div>
+      </div>
+
+      <div class="ref-item">
+        <span class="ref-cat teol">Teologia</span>
+        <div class="ref-cite">
+          <strong>Krause, D.</strong> "Poeira das estrelas: implicações teológicas da cosmologia moderna." <em>Encontros Teológicos</em>, Florianópolis, v. 37, n. 1, p. 195–210, 2022.
+        </div>
+      </div>
+
+      <div class="ref-item">
+        <span class="ref-cat teol">Teologia</span>
+        <div class="ref-cite">
+          Artigo de revisão: <strong>"Razão, ciência e secularismo: o desafio da apologética cristã no século XXI."</strong> <em>Estudos de Religião</em>, v. 37, n. 2, p. 147–168, 2023.
+        </div>
+      </div>
+
+      <div class="ref-item">
+        <span class="ref-cat teol">Teologia</span>
+        <div class="ref-cite">
+          <strong>Soden, J.</strong> "Concordismo." In: <em>Dicionário de Cristianismo e Ciência.</em> São Paulo: Thomas Nelson Brasil, 2018, p. 264.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Gênesis 1:3 · Hebreus 11:3 · Apocalipse 21:23 &nbsp;✦&nbsp; CMB · Big Bang · Cosmologia</p>
+  <p style="margin-top:0.5rem; opacity:0.5;">Apologética cristã em diálogo com a cosmologia moderna</p>
+</footer>
+
+<script>
+// ── STARFIELD ──
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+let stars = [];
+
+function resize() {
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+function initStars() {
+  stars = [];
+  const n = Math.floor((canvas.width * canvas.height) / 4000);
+  for (let i = 0; i < n; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.2 + 0.2,
+      a: Math.random(),
+      speed: Math.random() * 0.005 + 0.002,
+      phase: Math.random() * Math.PI * 2
+    });
+  }
+}
+
+function drawStars(t) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  stars.forEach(s => {
+    const alpha = s.a * (0.5 + 0.5 * Math.sin(t * s.speed + s.phase));
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(200,210,240,${alpha})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(drawStars);
+}
+
+resize();
+initStars();
+window.addEventListener('resize', () => { resize(); initStars(); });
+requestAnimationFrame(drawStars);
+
+// ── VERSE TABS ──
+function showVerse(id) {
+  document.querySelectorAll('.verse-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.vtab').forEach(b => b.classList.remove('active'));
+  document.getElementById('v-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.tl-item').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
